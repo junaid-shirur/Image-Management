@@ -49,7 +49,9 @@ img{
 
 export default function AddPopUp(props) {
     const [image, setImage] = useState()
-    
+
+    const [description, setdescription] = useState()
+
     useEffect(() => {
         const image = props.data.filter((img) => img.id === props.id)
         setImage(image[0])
@@ -58,10 +60,12 @@ export default function AddPopUp(props) {
     const dispatch = useDispatch()
     const handleSave = (e) => {
         e.preventDefault()
+        image.alt_description = description
         dispatch(uploadImage(image))
         props.onHide()
         alert("image upload successfull")
     }
+    
     return (
         <Modal
             {...props}
@@ -81,7 +85,7 @@ export default function AddPopUp(props) {
                     <div className="queries">
                         <div>
                             <span>Title</span> <br />
-                            <input type="text" defaultValue={image.user.name} />
+                            <input type="text" onChange={(e)=>setdescription(e.target.value)} defaultValue={image.alt_description.split(' ')[0]} />
                         </div>
                         <div>
                             <span>Type</span>

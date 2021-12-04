@@ -51,10 +51,10 @@ function App() {
 
     if (filterBy === 'title') {
       imageList.sort((a, b) => {
-        if (a.user.name.toLowerCase() < b.user.name.toLowerCase()) {
+        if (a.alt_description.toLowerCase() < b.alt_description.toLowerCase()) {
           return -1
         }
-        if (a.user.name.toLowerCase() > b.user.name.toLowerCase()) {
+        if (a.alt_description.toLowerCase() > b.alt_description.toLowerCase()) {
           return 1
         }
         return 0
@@ -92,16 +92,16 @@ function App() {
 
   const [searchText, setSearchText] = useState()
 
-  const [selectedDelete, setSelectedDelete] = useState({ });
+  const [selectedDelete, setSelectedDelete] = useState([]);
   const [selectAll, setselectAll] = useState(false);
+  console.log(selectedDelete);
 
-
-  console.log(selectAll);
   const handleChange = (e) => {
     e.preventDefault()
     setSearchText(e.target.value)
     dispatch(fetchImages(searchText))
   }
+
   const onSelectAll = () => {
     var temp = {}
     state.forEach(img => {
@@ -115,7 +115,7 @@ function App() {
 
     const filteredData = state.filter((img) => {
       if (selectedDelete[img.id]) {
-        if (selectedDelete[img.id].isChecked && selectAll[img.id]) {
+        if (selectedDelete[img.id].isChecked && selectAll) {
           return false
         }
       } else {
@@ -123,8 +123,8 @@ function App() {
       }
     })
     dispatch(deleteImage(filteredData))
-
   }
+
   return (
 
     <div style={{ backgroundColor: "#F5F5F5" }} >
@@ -142,7 +142,7 @@ function App() {
         <SearchBar>
           <label>
             select All{" "}
-            <input onChange={onSelectAll} type="checkbox" />{" "}
+            <input onChange={onSelectAll} checked={selectAll} type="checkbox" />{" "}
             <button  onClick={handleDelete}><DeleteOutlinedIcon /></button>
           </label>
           <input type="text" value={searchText} placeholder="search..." onChange={handleChange} />

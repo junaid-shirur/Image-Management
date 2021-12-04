@@ -37,7 +37,7 @@ export default function Images({ data, selectedDelete, setSelectedDelete}) {
     return (
         <>
             <Wrapper>
-                {data ? data.map((img, index) => {
+                {data ? data.map((img) => {
 
                     return (
                         <div key={img.id}>
@@ -47,7 +47,7 @@ export default function Images({ data, selectedDelete, setSelectedDelete}) {
                                 checked={(selectedDelete[img.id] && selectedDelete[img.id].isChecked) || false}
                                 onChange={(e) => { setSelectedDelete({ ...selectedDelete, [img.id]: { isChecked: e.target.checked } }); }} />
                             <img src={img.urls.thumb} alt={img.alt_description} />
-                            <span>{img.user.name}</span>
+                            <span>{img.alt_description.split(' ')[0]}</span>
                         </div>
                     )
                 }) : <p>loading...</p>}
