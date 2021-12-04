@@ -51,10 +51,10 @@ function App() {
 
     if (filterBy === 'title') {
       imageList.sort((a, b) => {
-        if (a.alt_description.toLowerCase() < b.alt_description.toLowerCase()) {
+        if (a.user.name.toLowerCase() < b.user.name.toLowerCase()) {
           return -1
         }
-        if (a.alt_description.toLowerCase() > b.alt_description.toLowerCase()) {
+        if (a.user.name.toLowerCase() > b.user.name.toLowerCase()) {
           return 1
         }
         return 0
@@ -94,7 +94,6 @@ function App() {
 
   const [selectedDelete, setSelectedDelete] = useState([]);
   const [selectAll, setselectAll] = useState(false);
-  console.log(selectedDelete);
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -109,20 +108,20 @@ function App() {
     });
     setSelectedDelete(temp)
     setselectAll(!selectAll)
+  
   }
 
   const handleDelete = () => {
-
-    const filteredData = state.filter((img) => {
-      if (selectedDelete[img.id]) {
-        if (selectedDelete[img.id].isChecked && selectAll) {
-          return false
-        }
-      } else {
-        return true
-      }
-    })
+    const filteredData = state.filter((img) =>!(selectedDelete[img.id] && selectedDelete[img.id].isChecked))
     dispatch(deleteImage(filteredData))
+  }
+
+  const DynamicDisable=()=>{
+
+    for (let item in selectedDelete) {
+      return !selectedDelete[item].isChecked
+    }
+    return true
   }
 
   return (
@@ -134,7 +133,7 @@ function App() {
           <h4>Media Library</h4>
           <span>Create,Edit and manage the media on your community</span>
         </div>
-        <button onClick={() => setModalShow(true)}>Add Image</button>
+        <button className="btn" onClick={() => setModalShow(true)}>Add Image</button>
       </Container>
 
       <Wrapper>
@@ -143,7 +142,7 @@ function App() {
           <label>
             select All{" "}
             <input onChange={onSelectAll} checked={selectAll} type="checkbox" />{" "}
-            <button  onClick={handleDelete}><DeleteOutlinedIcon /></button>
+            <button disabled={DynamicDisable()} onClick={handleDelete}><DeleteOutlinedIcon /></button>
           </label>
           <input type="text" value={searchText} placeholder="search..." onChange={handleChange} />
         </SearchBar>
@@ -152,9 +151,9 @@ function App() {
           <div>
             sort by :{" "}
           </div>
-          <button onClick={() => filterImages('title')}>Title</button>
-          <button onClick={() => filterImages('date')}>date</button>
-          <button onClick={() => filterImages('size')}>size</button>
+          <button className="btn" onClick={() => filterImages('title')}>Title</button>
+          <button className="btn" onClick={() => filterImages('date')}>date</button>
+          <button className="btn" onClick={() => filterImages('size')}>size</button>
         </SortingButtons>
 
       </Wrapper>

@@ -37,7 +37,7 @@ img{
             border-radius: 3px;
         }
         p{
-            font-weight: bold;
+            font-weight: 150;
         }
         span{
             color: grey;
@@ -60,7 +60,7 @@ export default function AddPopUp(props) {
     const dispatch = useDispatch()
     const handleSave = (e) => {
         e.preventDefault()
-        image.alt_description = description
+        image.user.name = description
         dispatch(uploadImage(image))
         props.onHide()
         alert("image upload successfull")
@@ -81,11 +81,11 @@ export default function AddPopUp(props) {
             </Modal.Header>
             <Modal.Body>
                 {image && <ImageWrap>
-                    <img src={image.urls.thumb} alt={image.alt_description} />
+                    <img src={image.urls.thumb} alt={image.user.name} />
                     <div className="queries">
                         <div>
                             <span>Title</span> <br />
-                            <input type="text" onChange={(e)=>setdescription(e.target.value)} defaultValue={image.alt_description.split(' ')[0]} />
+                            <input type="text" onChange={(e)=>setdescription(e.target.value)} defaultValue={image.user.name} />
                         </div>
                         <div>
                             <span>Type</span>

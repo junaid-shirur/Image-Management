@@ -31,7 +31,7 @@ img{
     
 }
 `
-export default function Images({ data, selectedDelete, setSelectedDelete}) {
+export default function Images({ data, selectedDelete, setSelectedDelete, selectAll}) {
 
     
     return (
@@ -44,10 +44,10 @@ export default function Images({ data, selectedDelete, setSelectedDelete}) {
                             <input
                                 type="checkbox"
                                 id={img.id}
-                                checked={(selectedDelete[img.id] && selectedDelete[img.id].isChecked) || false}
+                                checked={(selectedDelete[img.id] && selectedDelete[img.id].isChecked) || selectAll}
                                 onChange={(e) => { setSelectedDelete({ ...selectedDelete, [img.id]: { isChecked: e.target.checked } }); }} />
                             <img src={img.urls.thumb} alt={img.alt_description} />
-                            <span>{img.alt_description.split(' ')[0]}</span>
+                            <span>{img.user.name}</span>
                         </div>
                     )
                 }) : <p>loading...</p>}

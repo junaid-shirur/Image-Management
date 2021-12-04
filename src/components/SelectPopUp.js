@@ -92,7 +92,7 @@ export default function SelectPopUp(props) {
                     <span>search and select an image</span>
                     <div>
                         <input type="text" onChange={(e) => setname(e.target.value)} placeholder="search" />
-                        <button onClick={() => fetchImages(name)}>search</button>
+                        <button className="btn" onClick={() => fetchImages(name)}>search</button>
                     </div>
                 </HeaderWrapper>
             </Modal.Header>
