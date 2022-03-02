@@ -29,7 +29,8 @@ const ImageSlice = createSlice({
         },
         uploadImage: (state, action) => {
             state.images.push(action.payload)
-        }
+        },
+        
     },
     extraReducers: {
         [fetchImages.pending]: () => {

@@ -51,7 +51,6 @@ export default function AddPopUp(props) {
     const [image, setImage] = useState()
 
     const [description, setdescription] = useState()
-
     useEffect(() => {
         const image = props.data.filter((img) => img.id === props.id)
         setImage(image[0])
@@ -60,7 +59,9 @@ export default function AddPopUp(props) {
     const dispatch = useDispatch()
     const handleSave = (e) => {
         e.preventDefault()
+        let date = new Date()
         image.user.name = description
+        image.created_at = date.toISOString()
         dispatch(uploadImage(image))
         props.onHide()
         alert("image upload successfull")

@@ -18,10 +18,9 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchImages(name))
-  }, [dispatch])
+  }, [])
 
   const Container = styled.div`
-  
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -94,11 +93,20 @@ function App() {
 
   const [selectedDelete, setSelectedDelete] = useState([]);
   const [selectAll, setselectAll] = useState(false);
+  const [filtered, setfiltered] = useState(null)
 
   const handleChange = (e) => {
     e.preventDefault()
-    setSearchText(e.target.value)
-    dispatch(fetchImages(searchText))
+    var imageList = Object.assign([], state)
+    setSearchText(e.target.value.toLowerCase())
+    if (searchText !== '') {
+      const results = imageList.filter((image) => {
+        return image.user.name.toLowerCase().startsWith(searchText);
+      })
+      setfiltered(results)
+    } else if(searchText=='') {
+      setfiltered('')
+    }
   }
 
   const onSelectAll = () => {
@@ -164,6 +172,7 @@ function App() {
       />
 
       <Images
+        filter={filtered}
         data={state}
         selectedDelete={selectedDelete}
         selectAll={selectAll}
