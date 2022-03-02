@@ -112,9 +112,10 @@ export default function SelectPopUp(props) {
                                         show={true}
                                         onHide={() => setaddPopUp({
                                             ...addPopUp, isPop: false
-                                        })}
+                                        }),props.onHide}
                                         data={images}
                                         id={addPopUp.imageId}
+
                                     /> : <></>}
                             </div>
                         )
