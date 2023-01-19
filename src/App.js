@@ -146,14 +146,14 @@ function App() {
 
       <Wrapper>
 
-        <SearchBar>
+        {/* <SearchBar>
           <label>
             select All{" "}
             <input onChange={onSelectAll} checked={selectAll} type="checkbox" />{" "}
             <button disabled={DynamicDisable()} onClick={handleDelete}><DeleteOutlinedIcon /></button>
           </label>
           <input type="text" value={searchText} placeholder="search..." onChange={handleChange} />
-        </SearchBar>
+        </SearchBar> */}
 
         <SortingButtons>
           <div>
