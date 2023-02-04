@@ -1,6 +1,6 @@
 {
   "name": "image-management-app",
-  "homepage": "http://{junaid-shirur}.github.io/{Image-Management}",
+  "homepage": "http://junaid-shirur.github.io/Image-Management",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
