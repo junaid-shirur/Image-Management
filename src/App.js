@@ -141,19 +141,20 @@ function App() {
           <h4>Media Library</h4>
           <span>Create,Edit and manage the media on your community</span>
         </div>
-        <button className="btn" onClick={() => setModalShow(true)}>Add Image</button>
+        {/* ToDo: remove inline styles */}
+        <button style={{fontWeight: 500}} className="btn" onClick={() => setModalShow(true)}>Add Image</button>
       </Container>
 
       <Wrapper>
 
-        {/* <SearchBar>
+        <SearchBar>
           <label>
             select All{" "}
             <input onChange={onSelectAll} checked={selectAll} type="checkbox" />{" "}
             <button disabled={DynamicDisable()} onClick={handleDelete}><DeleteOutlinedIcon /></button>
           </label>
-          <input type="text" value={searchText} placeholder="search..." onChange={handleChange} />
-        </SearchBar> */}
+          {/* <input type="text" value={searchText} placeholder="search..." onChange={handleChange} /> */}
+        </SearchBar>
 
         <SortingButtons>
           <div>
